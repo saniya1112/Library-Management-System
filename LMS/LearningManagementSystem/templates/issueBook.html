@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Issue Book</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="book">Select Book:</label>
+                <select name="book" id="book" required>
+                    <option value="">Choose a book</option>
+                    {% for book in books %}
+                        <option value="{{ book.BookID }}">{{ book.name }} (ID: {{ book.BookID }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="member">Select Member:</label>
+                <select name="member" id="member" required>
+                    <option value="">Choose a member</option>
+                    {% for member in members %}
+                        <option value="{{ member.id }}">{{ member.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="issue_date">Issue Date:</label>
+                <input type="date" id="issue_date" name="issue_date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="due_date">Due Date:</label>
+                <input type="date" id="due_date" name="due_date" required>
+            </div>
+            
+            <button type="submit" class="button">Issue Book</button>
+        </form>
+    </div>
+</body>
+</html>
