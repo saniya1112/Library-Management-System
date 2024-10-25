@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Membership</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #f8f9fa; /* Light background color */
+            padding: 10px; /* Space around the nav */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        nav ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0; /* Remove default padding */
+            margin: 0; /* Remove default margin */
+            display: flex; /* Use flexbox for horizontal layout */
+            flex-wrap: nowrap; /* Ensure items do not wrap */
+        }
+
+        nav li {
+            margin-right: 20px; /* Space between nav items */
+        }
+
+        nav li:last-child {
+            margin-right: 0; /* Remove margin for the last item */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="button" href="{% url 'admin_home' %}">Home</a></li>
+           
+            <li><a class="button" href="#">Books/Movies</a></li>
+            <li><a class="button" href="#">User Management</a></li>
+            <li><a class="button" href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <h1>Add Membership</h1>
+
+    <!-- Display messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" required>
+
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" required>
+
+        <label for="contact_name">Contact Name</label>
+        <input type="text" id="contact_name" name="contact_name" required>
+
+       
+        <label for="adhaar_card_no">Aadhaar Card No</label>
+        <input type="text" id="adhaar_card_no" name="adhaar_card_no" required>
+
+        <label for="start_date">Start Date</label>
+        <input type="date" id="start_date" name="start_date" required>
+
+        <label for="end_date">End Date</label>
+        <input type="date" id="end_date" name="end_date" required>
+
+        <div class="radio-group">
+            <label>Membership Duration:</label>
+            <label><input type="radio" name="membership_duration" value="6 months" required> Six Months</label>
+            <label><input type="radio" name="membership_duration" value="1 year"> One Year</label>
+            <label><input type="radio" name="membership_duration" value="2 years"> Two Years</label>
+        </div>
+
+        <button type="submit" name="cancel" class="button">Cancel</button>
+        <button type="submit" name="confirm" class="button">Confirm</button>
+    </form>
+</body>
+</html>

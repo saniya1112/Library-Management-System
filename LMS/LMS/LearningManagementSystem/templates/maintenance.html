@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Page</title>
+    {% load static %} <!-- Load static files -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Maintenance Dashboard</h1>
+        <nav>
+            <ul>
+                <li><strong>Housekeeping</strong></li>
+             
+
+                <li><strong>Membership</strong></li>
+                <li><a class="button" href="{% url 'add_membership' %}">Add</a></li>
+                <li><a class="button" href="{% url 'update_membership' %}">Update</a></li>
+
+                <li><strong>Books/Movies</strong></li>
+                <li><a class="button" href="{% url 'add_book' %}">Add</a></li>
+                <li><strong>User Management</strong></li>
+                <li><a class="button" href="{% url 'add_user_management' %}">Add</a></li>
+                <li><a class="button" href="{% url 'update_user_management' %}">Update</a></li>
+                <li><a class="button" href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

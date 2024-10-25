@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Membership</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* Inline CSS for the navbar */
+        nav {
+            background-color: #f8f9fa; 
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin-right: 20px;
+        }
+        nav li:last-child {
+            margin-right: 0;
+        }
+        nav a.button {
+            text-decoration: none; 
+            padding: 8px 16px; 
+            color: #333; 
+            background-color: #e7e7e7; 
+            border-radius: 5px; 
+            transition: background-color 0.3s; 
+        }
+        nav a.button:hover {
+            background-color: #ddd; 
+        }
+        .messages {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            background-color: #f9f9f9; 
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="button" href="{% url 'admin_home' %}">Home</a></li>
+            python manage.py makemigrations
+python manage.py migrate
+
+            <li><a class="button" href="#">Books/Movies</a></li>
+            <li><a class="button" href="#">User Management</a></li>
+            <li><a class="button" href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+    </nav>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h1>Update Membership</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="membership_number">Membership Number:</label>
+            <input type="text" id="membership_number" name="membership_number" required>
+        </div>
+        <div>
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+        </div>
+        <div>
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+        </div>
+        <div>
+            <label>Membership Extension:</label><br>
+            <input type="radio" id="six_months" name="membership_extension" value="six_months">
+            <label for="six_months">Six Months</label><br>
+            <input type="radio" id="one_year" name="membership_extension" value="one_year">
+            <label for="one_year">One Year</label><br>
+            <input type="radio" id="two_years" name="membership_extension" value="two_years">
+            <label for="two_years">Two Years</label><br>
+            <input type="radio" id="remove" name="membership_extension" value="remove">
+            <label for="remove">Membership Remove</label>
+        </div>
+        <div>
+            <button type="submit" name="cancel">Cancel</button>
+            <button type="submit" name="confirm">Confirm</button>
+        </div>
+    </form>
+</body>
+</html>
