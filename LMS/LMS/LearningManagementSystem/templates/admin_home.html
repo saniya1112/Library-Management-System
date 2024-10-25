@@ -78,14 +78,14 @@
                     {% for book in books %}
                     <tr>
                         <td>{{ book.BookID }}</td>
-                        <td>{{ book.Name }}</td>
-                        <td>{{ book.Author }}</td>
-                        <td>{{ book.Category }}</td>
-                        <td>{{ book.Status }}</td>
-                        <td>{{ book.Cost }}</td>
-                        <td>{{ book.ProcurementDate }}</td>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.category }}</td>
+                        <td>{{ book.status }}</td>
+                        <td>{{ book.cost }}</td>
+                        <td>{{ book.procurement_date }}</td>
                         <td>
-                            <a href="{% url 'update_book' book.id %}" class="button">Update</a>  <!-- Update button -->
+                            <a href="{% url 'update_book' book.BookID %}" class="button">Update</a>  <!-- Update button with BookID -->
                         </td>
                     </tr>
                     {% empty %}
@@ -97,7 +97,6 @@
             </table>
         </div>
         <a class="button" href="{% url 'add_book' %}">Add Book</a>
-
         <a class="button" href="{% url 'logout' %}">Log Out</a>
     </div>
 </body>

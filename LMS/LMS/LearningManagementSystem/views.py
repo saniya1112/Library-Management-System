@@ -32,10 +32,6 @@ def login_view(request):
 
     return render(request, 'login.html')  # Render the login page for GET requests
 
-def admin_home(request):
-    return render(request, 'admin_home.html')  # Render your admin home page template
-
-
 def user_page(request):
     return render(request, 'user_page.html')  # Render your user page template
 # start maintance
@@ -151,47 +147,33 @@ def add_book(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Book added successfully!')
-            return redirect('admin-home')  # Replace with your book list URL name
+            return redirect('admin_home')  # Replace with your book list URL name
     else:
         form = BookForm()
     return render(request, 'add_book.html', {'form': form})
 
 # View to update an existing book
 def update_book(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
-    if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            form.save()
-            return redirect('admin-home')  # Redirect after a successful update
-    else:
-        form = BookForm(instance=book)
+    book = get_object_or_404(Book, BookID=book_id)  # Use BookID here
+    form = BookForm(request.POST or None, instance=book)
+    if form.is_valid():
+        form.save()
+        return redirect('admin_home')  # Redirect to the list page after update
+    return render(request, 'update_book.html', {'form': form})
 
-    return render(request, 'update_book.html', {'form': form, 'book': book})  # Pass 'book' if needed
 
 
 def add_user_management(request):
     if request.method == 'POST':
-        # Process form data here
-        # Example: Get the admin checkbox status
         is_admin = request.POST.get('admin', 'off') == 'on'
-
-        # You would normally save this data to your model here
-
         messages.success(request, "User management added successfully.")
-        return redirect('add_user_management')  # Adjust redirect as needed
+        return redirect('add_user_management') 
 
     return render(request, 'add_user_management.html')
 
-# View for updating user management
 def update_user_management(request):
     if request.method == 'POST':
-        # Process form data here
-        # Example: Get the active checkbox status
         is_active = request.POST.get('active', 'off') == 'on'
-
-        # You would normally update this data in your model here
-
         messages.success(request, "User management updated successfully.")
         return redirect('update_user_management')  # Adjust redirect as needed
 
@@ -206,6 +188,6 @@ def reports_page(request):
 def transactions_page(request):
     return render(request, 'transactions.html')  # Render your transactions page template
 
-def book_list(request):
+def admin_home(request):
     books = Book.objects.all()  # Fetch all books from the database
-    return render(request, 'book_list.html', {'books': books})
+    return render(request, 'admin_home.html', {'books': books})

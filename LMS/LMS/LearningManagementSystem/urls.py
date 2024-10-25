@@ -13,7 +13,6 @@ from .views import (
     add_book,
     add_user_management,
     update_user_management,
-    book_list,
     update_book,
 )
 
@@ -29,9 +28,8 @@ urlpatterns = [
     path('membership/add/', add_membership, name='add_membership'),  # Add Membership
     path('membership/update/', update_membership, name='update_membership'), 
     path('add-book/', add_book, name='add_book'), 
-    path('update_book/<int:book_id>/', update_book, name='update_book_movie'),
+    path('update_book/<int:book_id>/', update_book, name='update_book'),
     path('user/add/', add_user_management, name='add_user_management'),  # Add User
     path('user/update/', update_user_management, name='update_user_management'),
     path('membership/add/', add_membership, name='add_membership'), # Update User
-    path('book-list/', book_list, name='book_list'),
 ]
